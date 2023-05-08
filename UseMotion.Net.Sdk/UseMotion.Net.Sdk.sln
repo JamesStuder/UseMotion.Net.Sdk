@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseMotion.Net.Sdk", "UseMotion.Net.Sdk\UseMotion.Net.Sdk.csproj", "{039B5D2F-621E-42FB-97E9-436A6EC2A121}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseMotion.Net.Sdk.Tests", "UseMotion.Net.Sdk.Tests\UseMotion.Net.Sdk.Tests.csproj", "{A5C1C403-9426-4428-AF6B-C4E6F04E94A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{039B5D2F-621E-42FB-97E9-436A6EC2A121}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{039B5D2F-621E-42FB-97E9-436A6EC2A121}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{039B5D2F-621E-42FB-97E9-436A6EC2A121}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{039B5D2F-621E-42FB-97E9-436A6EC2A121}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5C1C403-9426-4428-AF6B-C4E6F04E94A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5C1C403-9426-4428-AF6B-C4E6F04E94A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5C1C403-9426-4428-AF6B-C4E6F04E94A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5C1C403-9426-4428-AF6B-C4E6F04E94A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

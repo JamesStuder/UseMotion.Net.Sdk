@@ -1,0 +1,17 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/projectSettingsUpdater.xml
+/.idea.UseMotion.Net.Sdk.iml
+/modules.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+/UseMotion.Net.Sdk/UseMotion.Net.Sdk.Tests/bin/
+/UseMotion.Net.Sdk/UseMotion.Net.Sdk.Tests/obj/
+/UseMotion.Net.Sdk/UseMotion.Net.Sdk/obj/
+/UseMotion.Net.Sdk/UseMotion.Net.Sdk/bin/
