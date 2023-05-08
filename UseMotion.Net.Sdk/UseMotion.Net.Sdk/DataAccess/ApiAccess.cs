@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +19,13 @@ public class ApiAccess
         Client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
     }
 
+    /// <summary>
+    /// Post data to endpoint
+    /// </summary>
+    /// <param name="endpoint">Endpoint to call</param>
+    /// <param name="json">Data to patch to endpoint</param>
+    /// <returns>Json string from API with the requested data</returns>
+    /// <exception cref="Exception">If not a success code from API will throw exception with status code received and the name of the endpoint</exception>
     internal async Task<string> PostAsync(string endpoint, string json)
     {
         StringContent content = new (json, Encoding.UTF8, "application/json");
@@ -33,6 +39,13 @@ public class ApiAccess
         return await response.Content.ReadAsStringAsync();
     }
     
+    /// <summary>
+    /// Patch data to endpoint
+    /// </summary>
+    /// <param name="endpoint">Endpoint to call</param>
+    /// <param name="json">Data to patch to endpoint</param>
+    /// <returns>Json string from API with the requested data</returns>
+    /// <exception cref="Exception">If not a success code from API will throw exception with status code received and the name of the endpoint</exception>
     internal async Task<string> PatchAsync(string endpoint, string json)
     {
         StringContent content = new (json, Encoding.UTF8, "application/json");
@@ -46,6 +59,13 @@ public class ApiAccess
         return await response.Content.ReadAsStringAsync();
     }
     
+    /// <summary>
+    /// Get data from endpoint
+    /// </summary>
+    /// <param name="endpoint">Endpoint to call</param>
+    /// <param name="queryParameters">Default = null.  Pass in query parameter as key and the value of the parameter as the value</param>
+    /// <returns>Json string from API with the requested data</returns>
+    /// <exception cref="Exception">If not a success code from API will throw exception with status code received and the name of the endpoint</exception>
     internal async Task<string> GetAsync(string endpoint, Dictionary<string, string>? queryParameters = null)
     {
         UriBuilder uriBuilder = new (new Uri(Client.BaseAddress!, endpoint));
@@ -72,15 +92,14 @@ public class ApiAccess
         return await response.Content.ReadAsStringAsync();
     }
     
-    internal async Task<string> DeleteAsync(string endpoint)
+    /// <summary>
+    /// Delete data from endpoint
+    /// </summary>
+    /// <param name="endpoint">Endpoint to call</param>
+    /// <returns>True if successful and false if not successful</returns>
+    internal async Task<bool> DeleteAsync(string endpoint)
     {
         HttpResponseMessage response = await Client.DeleteAsync(endpoint);
-
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new Exception($"DeleteAsync Error: {response.StatusCode} for endpoint {endpoint}");
-            
-        }
-        return await response.Content.ReadAsStringAsync();
+        return response.IsSuccessStatusCode;
     }
 }
