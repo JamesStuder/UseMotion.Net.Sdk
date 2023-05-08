@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
 
-namespace UseMotion.Net.Sdk.Models;
-
-public class Label
+namespace UseMotion.Net.Sdk.Models
 {
-    /// <summary>
-    /// Label Name
-    /// </summary>
-    [JsonProperty("name")]
-    public required string Name { get; set; }
+    public class Label
+    {
+        /// <summary>
+        /// Label Name
+        /// </summary>
+        [JsonProperty("name")]
+        public required string Name { get; set; }
+    }
 }
