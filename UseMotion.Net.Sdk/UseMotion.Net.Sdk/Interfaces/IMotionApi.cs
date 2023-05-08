@@ -43,7 +43,7 @@ namespace UseMotion.Net.Sdk.Interfaces
         /// List Tasks
         /// </summary>
         /// <remarks>By default, all tasks that are completed are left out unless specifically filtered for via the status.</remarks>
-        /// <param name="workSpaceId">Limit tasks returned by the status on the task</param>
+        /// <param name="workspaceId">Limit tasks returned by the status on the task</param>
         /// <param name="assigneeId">Limit tasks returned to a specific assignee</param>
         /// <param name="cursor">Use if a previous request returned a cursor. Will page through results</param>
         /// <param name="label">Limit tasks returned by label on the task</param>
@@ -51,7 +51,7 @@ namespace UseMotion.Net.Sdk.Interfaces
         /// <param name="projectId">Limit tasks returned to those that contain this string. Case in-sensitive</param>
         /// <param name="status">Limit tasks returned by the status on the task</param>
         /// <returns>List of tasks</returns>
-        public ListTasks ListTasks(string workSpaceId, string assigneeId = "", string cursor = "", string label = "", string name = "", string projectId = "", string status = "");
+        public ListTasks ListTasks(string workspaceId, string assigneeId = "", string cursor = "", string label = "", string name = "", string projectId = "", string status = "");
     
         /// <summary>
         /// Move Workspace

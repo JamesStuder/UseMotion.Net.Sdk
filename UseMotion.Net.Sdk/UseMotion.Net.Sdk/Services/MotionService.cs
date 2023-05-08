@@ -43,11 +43,11 @@ namespace UseMotion.Net.Sdk.Services
             return JsonConvert.DeserializeObject<Task>(responseJson)!;
         }
 
-        public ListTasks ListTasks(string workSpaceId, string assigneeId = "", string cursor = "", string label = "", string name = "", string projectId = "", string status = "")
+        public ListTasks ListTasks(string workspaceId, string assigneeId = "", string cursor = "", string label = "", string name = "", string projectId = "", string status = "")
         {
             Dictionary<string, string> properties = new ()
             {
-                { "workSpaceId", workSpaceId },
+                { "workSpaceId", workspaceId },
                 { "assigneeId", assigneeId },
                 { "cursor", cursor },
                 { "label", label },
@@ -73,12 +73,23 @@ namespace UseMotion.Net.Sdk.Services
         #region Recurring Tasks
         public RecurringTask CreateRecurringTask(RecurringTaskPost data)
         {
-            throw new System.NotImplementedException();
+            string jsonToSend = JsonConvert.SerializeObject(data);
+            string responseJson = MotionApiAccess.PostAsync("/recurring-tasks", jsonToSend).Result;
+            return JsonConvert.DeserializeObject<RecurringTask>(responseJson)!;
         }
 
         public ListRecurringTasks ListRecurringTasks(string workspaceId, string cursor = "")
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, string> properties = new ()
+            {
+                { "workSpaceId", workspaceId },
+                { "cursor", cursor },
+            };
+
+            properties = properties.Where(entry => !string.IsNullOrEmpty(entry.Value)).ToDictionary(entry => entry.Key, entry => entry.Value);
+            
+            string responseJson = MotionApiAccess.GetAsync("/recurring-tasks", properties).Result;
+            return JsonConvert.DeserializeObject<ListRecurringTasks>(responseJson)!;
         }
 
         public bool DeleteRecurringTask(string id)
