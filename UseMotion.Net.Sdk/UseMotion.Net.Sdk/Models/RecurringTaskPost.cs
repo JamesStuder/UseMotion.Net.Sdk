@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace UseMotion.Net.Sdk.Models;
 
-public class RecurringTasksPost
+public class RecurringTaskPost
 {
     /// <summary>
     /// Frequency in which the task should be scheduled. Please carefully read how to construct above.

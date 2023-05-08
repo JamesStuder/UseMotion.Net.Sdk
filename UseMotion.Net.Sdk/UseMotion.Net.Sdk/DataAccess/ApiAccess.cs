@@ -8,7 +8,7 @@ using System.Web;
 
 namespace UseMotion.Net.Sdk.DataAccess;
 
-public class ApiAccess
+internal class ApiAccess
 {
     private HttpClient Client { get; }
     internal ApiAccess(string apiKey)
