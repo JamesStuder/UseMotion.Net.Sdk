@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http.Json;
+using Newtonsoft.Json;
 using UseMotion.Net.Sdk.DataAccess;
 using UseMotion.Net.Sdk.Interfaces;
 using UseMotion.Net.Sdk.Models;
@@ -13,37 +16,61 @@ namespace UseMotion.Net.Sdk.Services
         {
             MotionApiAccess = new ApiAccess(apiKey);
         }
-    
+
+        #region Tasks
         public Task UpdateTask(string taskId, TaskPatch data)
         {
-            throw new System.NotImplementedException();
+            string jsonToSend = JsonConvert.SerializeObject(data);
+            string responseJson = MotionApiAccess.PatchAsync($"/tasks/{taskId}", jsonToSend).Result;
+            return JsonConvert.DeserializeObject<Task>(responseJson)!;
         }
 
         public Task RetrieveTask(string taskId)
         {
-            throw new System.NotImplementedException();
+            string responseJson = MotionApiAccess.GetAsync($"/tasks/{taskId}").Result;
+            return JsonConvert.DeserializeObject<Task>(responseJson)!;
         }
 
         public bool DeleteTask(string taskId)
         {
-            throw new System.NotImplementedException();
+            return MotionApiAccess.DeleteAsync($"/tasks/{taskId}").Result;
         }
 
         public Task CreateTask(TaskPost data)
         {
-            throw new System.NotImplementedException();
+            string jsonToSend = JsonConvert.SerializeObject(data);
+            string responseJson = MotionApiAccess.PostAsync($"/tasks", jsonToSend).Result;
+            return JsonConvert.DeserializeObject<Task>(responseJson)!;
         }
 
         public ListTasks ListTasks(string workSpaceId, string assigneeId = "", string cursor = "", string label = "", string name = "", string projectId = "", string status = "")
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, string> properties = new ()
+            {
+                { "workSpaceId", workSpaceId },
+                { "assigneeId", assigneeId },
+                { "cursor", cursor },
+                { "label", label },
+                { "name", name },
+                { "projectId", projectId },
+                { "status", status }
+            };
+
+            properties = properties.Where(entry => !string.IsNullOrEmpty(entry.Value)).ToDictionary(entry => entry.Key, entry => entry.Value);
+            
+            string responseJson = MotionApiAccess.GetAsync($"/tasks", properties).Result;
+            return JsonConvert.DeserializeObject<ListTasks>(responseJson)!;
         }
 
         public Task MoveWorkspace(string taskId, MoveTask data)
         {
-            throw new System.NotImplementedException();
+            string jsonToSend = JsonConvert.SerializeObject(data);
+            string responseJson = MotionApiAccess.PatchAsync($"/tasks/{taskId}/move", jsonToSend).Result;
+            return JsonConvert.DeserializeObject<Task>(responseJson)!;
         }
+        #endregion
 
+        #region Recurring Tasks
         public RecurringTask CreateRecurringTask(RecurringTaskPost data)
         {
             throw new System.NotImplementedException();
@@ -56,9 +83,11 @@ namespace UseMotion.Net.Sdk.Services
 
         public bool DeleteRecurringTask(string id)
         {
-            throw new System.NotImplementedException();
+            return MotionApiAccess.DeleteAsync($"/recurring-tasks/{id}").Result;
         }
+        #endregion
 
+        #region Comments
         public Comment CreateComment(CommentPost data)
         {
             throw new System.NotImplementedException();
@@ -68,7 +97,9 @@ namespace UseMotion.Net.Sdk.Services
         {
             throw new System.NotImplementedException();
         }
+        #endregion
 
+        #region Projects
         public Project RetrieveProject(string id)
         {
             throw new System.NotImplementedException();
@@ -83,7 +114,9 @@ namespace UseMotion.Net.Sdk.Services
         {
             throw new System.NotImplementedException();
         }
-
+        #endregion
+        
+        #region Workspaces
         public List<Status> ListStatusesForAWorkspace(string workspaceId)
         {
             throw new System.NotImplementedException();
@@ -93,15 +126,20 @@ namespace UseMotion.Net.Sdk.Services
         {
             throw new System.NotImplementedException();
         }
-
+        #endregion
+        
+        #region Users
         public ListUsers ListUsers(string cursor = "", string teamId = "", string workspaceId = "")
         {
             throw new System.NotImplementedException();
         }
-
+        #endregion
+        
+        #region Schedules
         public List<Schedule> GetSchedules()
         {
             throw new System.NotImplementedException();
         }
+        #endregion
     }
 }
