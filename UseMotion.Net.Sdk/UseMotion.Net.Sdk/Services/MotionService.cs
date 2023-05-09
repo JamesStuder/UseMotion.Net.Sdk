@@ -57,7 +57,7 @@ namespace UseMotion.Net.Sdk.Services
 
             properties = properties.Where(entry => !string.IsNullOrEmpty(entry.Value)).ToDictionary(entry => entry.Key, entry => entry.Value);
             
-            string responseJson = MotionApiAccess.GetAsync($"/tasks", properties).Result;
+            string responseJson = MotionApiAccess.GetAsync("/tasks", properties).Result;
             return JsonConvert.DeserializeObject<ListTasks>(responseJson)!;
         }
 
