@@ -29,4 +29,8 @@
       <None Remove="obj\**" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\UseMotion.Net.Sdk\UseMotion.Net.Sdk.csproj" />
+    </ItemGroup>
+
 </Project>
