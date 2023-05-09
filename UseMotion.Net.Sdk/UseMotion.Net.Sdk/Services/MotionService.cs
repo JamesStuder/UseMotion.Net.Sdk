@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Json;
 using Newtonsoft.Json;
 using UseMotion.Net.Sdk.DataAccess;
 using UseMotion.Net.Sdk.Interfaces;
@@ -39,7 +38,7 @@ namespace UseMotion.Net.Sdk.Services
         public Task CreateTask(TaskPost data)
         {
             string jsonToSend = JsonConvert.SerializeObject(data);
-            string responseJson = MotionApiAccess.PostAsync($"/tasks", jsonToSend).Result;
+            string responseJson = MotionApiAccess.PostAsync("/tasks", jsonToSend).Result;
             return JsonConvert.DeserializeObject<Task>(responseJson)!;
         }
 
@@ -47,7 +46,7 @@ namespace UseMotion.Net.Sdk.Services
         {
             Dictionary<string, string> properties = new ()
             {
-                { "workSpaceId", workspaceId },
+                { "workspaceId", workspaceId },
                 { "assigneeId", assigneeId },
                 { "cursor", cursor },
                 { "label", label },
@@ -82,7 +81,7 @@ namespace UseMotion.Net.Sdk.Services
         {
             Dictionary<string, string> properties = new ()
             {
-                { "workSpaceId", workspaceId },
+                { "workspaceId", workspaceId },
                 { "cursor", cursor },
             };
 
@@ -101,55 +100,106 @@ namespace UseMotion.Net.Sdk.Services
         #region Comments
         public Comment CreateComment(CommentPost data)
         {
-            throw new System.NotImplementedException();
+            string jsonToSend = JsonConvert.SerializeObject(data);
+            string responseJson = MotionApiAccess.PostAsync("/comments", jsonToSend).Result;
+            return JsonConvert.DeserializeObject<Comment>(responseJson)!;
         }
 
         public ListComments ListComments(string taskId, string cursor = "")
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, string> properties = new ()
+            {
+                { "taskId", taskId },
+                { "cursor", cursor },
+            };
+
+            properties = properties.Where(entry => !string.IsNullOrEmpty(entry.Value)).ToDictionary(entry => entry.Key, entry => entry.Value);
+            
+            string responseJson = MotionApiAccess.GetAsync("/comments", properties).Result;
+            return JsonConvert.DeserializeObject<ListComments>(responseJson)!;
         }
         #endregion
 
         #region Projects
         public Project RetrieveProject(string id)
         {
-            throw new System.NotImplementedException();
+            string responseJson = MotionApiAccess.GetAsync($"/projects/{id}").Result;
+            return JsonConvert.DeserializeObject<Project>(responseJson)!;
         }
 
         public ListProjects ListProjects(string workspaceId, string cursor = "")
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, string> properties = new ()
+            {
+                { "workspaceId", workspaceId },
+                { "cursor", cursor }
+            };
+
+            properties = properties.Where(entry => !string.IsNullOrEmpty(entry.Value)).ToDictionary(entry => entry.Key, entry => entry.Value);
+            
+            string responseJson = MotionApiAccess.GetAsync("/projects", properties).Result;
+            return JsonConvert.DeserializeObject<ListProjects>(responseJson)!;
         }
 
         public Project CreateProject(ProjectPost data)
         {
-            throw new System.NotImplementedException();
+            string jsonToSend = JsonConvert.SerializeObject(data);
+            string responseJson = MotionApiAccess.PostAsync("/projects", jsonToSend).Result;
+            return JsonConvert.DeserializeObject<Project>(responseJson)!;
         }
         #endregion
         
         #region Workspaces
         public List<Status> ListStatusesForAWorkspace(string workspaceId)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, string> properties = new ()
+            {
+                { "workspaceId", workspaceId }
+            };
+
+            string responseJson = MotionApiAccess.GetAsync("/statuses", properties).Result;
+            return JsonConvert.DeserializeObject<List<Status>>(responseJson)!;
         }
 
         public ListWorkspaces ListWorkspaces(string cursor = "", string[]? ids = null)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, string> properties = new();
+
+            if (!string.IsNullOrEmpty(cursor))
+            {
+                properties.Add("cursor", cursor);
+            }
+            
+            if (ids != null && ids.Length > 0)
+            {
+                properties.Add("ids", string.Join(",", ids));
+            }
+
+            string responseJson = MotionApiAccess.GetAsync("/workspaces", properties).Result;
+            return JsonConvert.DeserializeObject<ListWorkspaces>(responseJson)!;
         }
         #endregion
         
         #region Users
         public ListUsers ListUsers(string cursor = "", string teamId = "", string workspaceId = "")
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, string> properties = new ()
+            {
+                { "cursor", cursor },
+                { "teamId", teamId },
+                { "workspaceId", workspaceId }
+            };
+
+            string responseJson = MotionApiAccess.GetAsync("/users", properties).Result;
+            return JsonConvert.DeserializeObject<ListUsers>(responseJson)!;
         }
         #endregion
         
         #region Schedules
         public List<Schedule> GetSchedules()
         {
-            throw new System.NotImplementedException();
+            string responseJson = MotionApiAccess.GetAsync("/schedules").Result;
+            return JsonConvert.DeserializeObject<List<Schedule>>(responseJson)!;
         }
         #endregion
     }
