@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using UseMotion.Net.Sdk.Interfaces;
@@ -12,9 +12,12 @@ namespace UseMotion.Net.Sdk.Tests
     public class ApiServiceTests
     {
         private IMotionApi MotionApi { get; }
+        private IConfiguration Config { get; }
         public ApiServiceTests()
         {
-            MotionApi = new MotionService(Environment.GetEnvironmentVariable("MotionApiKey", EnvironmentVariableTarget.User)!);
+            IConfigurationBuilder builder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
+            Config = builder.Build();
+            MotionApi = new MotionService(Config["UseMotionAPIKey"] ?? string.Empty);
         }
         
         #region Tasks
@@ -182,6 +185,8 @@ namespace UseMotion.Net.Sdk.Tests
             const string[]? ids = null;
 
             ListWorkspaces responseObject = MotionApi.ListWorkspaces(cursor, ids);
+            Assert.That(responseObject, Is.Not.Null);
+            Assert.That(responseObject.Workspaces, Is.Not.Empty);
 
         }
         #endregion
@@ -195,6 +200,8 @@ namespace UseMotion.Net.Sdk.Tests
             const string workspaceId = "";
 
             ListUsers responseObject = MotionApi.ListUsers(cursor, teamId, workspaceId);
+            Assert.That(responseObject, Is.Not.Null);
+            Assert.That(responseObject.Users, Is.Not.Empty);
         }
         #endregion
     

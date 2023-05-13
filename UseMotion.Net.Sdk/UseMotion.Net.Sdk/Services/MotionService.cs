@@ -156,7 +156,7 @@ namespace UseMotion.Net.Sdk.Services
             {
                 { "workspaceId", workspaceId }
             };
-
+            properties = properties.Where(pair => !string.IsNullOrEmpty(pair.Value)).ToDictionary(pair => pair.Key, pair => pair.Value);
             string responseJson = MotionApiAccess.GetAsync("/statuses", properties).Result;
             return JsonConvert.DeserializeObject<List<Status>>(responseJson)!;
         }
@@ -174,7 +174,7 @@ namespace UseMotion.Net.Sdk.Services
             {
                 properties.Add("ids", string.Join(",", ids));
             }
-
+            properties = properties.Where(pair => !string.IsNullOrEmpty(pair.Value)).ToDictionary(pair => pair.Key, pair => pair.Value);
             string responseJson = MotionApiAccess.GetAsync("/workspaces", properties).Result;
             return JsonConvert.DeserializeObject<ListWorkspaces>(responseJson)!;
         }
@@ -189,8 +189,10 @@ namespace UseMotion.Net.Sdk.Services
                 { "teamId", teamId },
                 { "workspaceId", workspaceId }
             };
+            
+            properties = properties.Where(pair => !string.IsNullOrEmpty(pair.Value)).ToDictionary(pair => pair.Key, pair => pair.Value);
 
-            string responseJson = MotionApiAccess.GetAsync("/users", properties).Result;
+            string responseJson = MotionApiAccess.GetAsync("v1/users", properties).Result;
             return JsonConvert.DeserializeObject<ListUsers>(responseJson)!;
         }
         #endregion

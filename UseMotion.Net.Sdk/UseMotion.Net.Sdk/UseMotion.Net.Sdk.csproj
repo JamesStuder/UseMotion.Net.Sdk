@@ -4,6 +4,15 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Version>2023.05.12.01</Version>
+        <Title>UseMotion /NET SDK</Title>
+        <Description>.NET SDK for Use Motion App API</Description>
+        <RepositoryUrl>https://github.com/JamesStuder/UseMotion.Net.Sdk</RepositoryUrl>
+        <RepositoryType>GitHub</RepositoryType>
+        <PackageTags>UseMotion, .NET, API</PackageTags>
+        <AssemblyVersion>2023.05.12.01</AssemblyVersion>
+        <FileVersion>2023.05.12.01</FileVersion>
     </PropertyGroup>
 
     <ItemGroup>

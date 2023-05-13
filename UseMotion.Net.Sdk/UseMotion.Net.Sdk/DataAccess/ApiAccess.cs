@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,21 +69,13 @@ namespace UseMotion.Net.Sdk.DataAccess
         /// <exception cref="Exception">If not a success code from API will throw exception with status code received and the name of the endpoint</exception>
         internal async Task<string> GetAsync(string endpoint, Dictionary<string, string>? queryParameters = null)
         {
-            UriBuilder uriBuilder = new (new Uri(Client.BaseAddress!, endpoint));
-        
             if (queryParameters != null)
             {
-                NameValueCollection query = HttpUtility.ParseQueryString(uriBuilder.Query);
-                foreach (KeyValuePair<string, string> param in queryParameters)
-                {
-                    query[param.Key] = param.Value;
-                }
-                uriBuilder.Query = query.ToString();
+                string query = string.Join("&", queryParameters.Select(kv => $"{Uri.EscapeDataString(kv.Key)}={Uri.EscapeDataString(kv.Value)}"));
+                endpoint += query;
             }
-        
-            string urlWithParams = uriBuilder.ToString();
-        
-            HttpResponseMessage response = await Client.DeleteAsync(urlWithParams);
+
+            HttpResponseMessage response = await Client.GetAsync(endpoint);
 
             if (!response.IsSuccessStatusCode)
             {

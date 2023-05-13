@@ -1,0 +1,8 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0a1cd982_002Dfdc7_002D4a81_002D95e8_002D6e6482baffdf/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ListUsers" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::A5C1C403-9426-4428-AF6B-C4E6F04E94A4::net7.0::UseMotion.Net.Sdk.Tests.ApiServiceTests.ListUsers&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::A5C1C403-9426-4428-AF6B-C4E6F04E94A4::net7.0::UseMotion.Net.Sdk.Tests.ApiServiceTests.ListWorkspacesTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::A5C1C403-9426-4428-AF6B-C4E6F04E94A4::net7.0::UseMotion.Net.Sdk.Tests.ApiServiceTests.ListStatusesForAWorkspaceTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
