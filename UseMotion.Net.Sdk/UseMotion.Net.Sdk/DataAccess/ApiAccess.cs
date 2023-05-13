@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -12,11 +13,16 @@ namespace UseMotion.Net.Sdk.DataAccess
     internal class ApiAccess
     {
         private HttpClient Client { get; }
+        private string ApiKey { get; }
+        private static string ApiVersion => "v1";
+        
         internal ApiAccess(string apiKey)
         {
+            ApiKey = apiKey;
+            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+
             Client = new HttpClient();
-            Client.BaseAddress = new Uri("https://api.usemotion.net/v1");
-            Client.DefaultRequestHeaders.Clear();
+            Client.BaseAddress = new Uri("https://api.usemotion.com/");
             Client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
         }
 
@@ -55,7 +61,6 @@ namespace UseMotion.Net.Sdk.DataAccess
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception($"PatchAsync Error: {response.StatusCode} for endpoint {endpoint}");
-            
             }
             return await response.Content.ReadAsStringAsync();
         }
@@ -74,8 +79,8 @@ namespace UseMotion.Net.Sdk.DataAccess
                 string query = string.Join("&", queryParameters.Select(kv => $"{Uri.EscapeDataString(kv.Key)}={Uri.EscapeDataString(kv.Value)}"));
                 endpoint += query;
             }
-
-            HttpResponseMessage response = await Client.GetAsync(endpoint);
+            
+            HttpResponseMessage response = await Client.GetAsync($"{ApiVersion}{endpoint}");
 
             if (!response.IsSuccessStatusCode)
             {
