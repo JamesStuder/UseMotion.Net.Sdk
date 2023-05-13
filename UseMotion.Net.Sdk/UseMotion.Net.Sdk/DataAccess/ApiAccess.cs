@@ -85,7 +85,6 @@ namespace UseMotion.Net.Sdk.DataAccess
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception($"GetAsync Error: {response.StatusCode} for endpoint {endpoint}");
-            
             }
             return await response.Content.ReadAsStringAsync();
         }
