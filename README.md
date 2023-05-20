@@ -1,4 +1,5 @@
 # UseMotion.Net.Sdk
-SDK that I created to work with the Use Motion App API
+This is a .NET SDK that I created to work with the Motion (https://www.usemotion.com/) API.
 
-Currently under construction
+## Implementation
+1) Install Nuget Package
