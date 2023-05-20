@@ -8,13 +8,13 @@ namespace UseMotion.Net.Sdk.Models
         /// <summary>
         /// ISO 8601 Date which is trimmed to the start of the day passed.  Example: 2023-04-20
         /// </summary>
-        [JsonProperty("startDate")]
+        [JsonProperty("startDate", NullValueHandling=NullValueHandling.Ignore)]
         public DateTime? StartDate { get; set; }
 
         /// <summary>
         /// default = SOFT, Allowed Values: SOFT, HARD, NONE
         /// </summary>
-        [JsonProperty("deadlineType")]
+        [JsonProperty("deadlineType", NullValueHandling=NullValueHandling.Ignore)]
         public string? DeadlineType { get; set; }
 
         /// <summary>

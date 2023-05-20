@@ -24,13 +24,15 @@ namespace UseMotion.Net.Sdk.Tests
         [Test]
         public void UpdateTaskTest()
         {
-            const string taskId = "";
+            string taskId = Config["TaskId"] ?? string.Empty;
             TaskPatch data = new()
             {
-                Name = ""
+                Name = "Updated Via API"
             };
     
             Task responseObject = MotionApi.UpdateTask(taskId, data);
+            Assert.That(responseObject, Is.Not.Null);
+            Assert.That(responseObject.Name, Is.EqualTo(data.Name));
         }
 
         [Test]
@@ -45,8 +47,9 @@ namespace UseMotion.Net.Sdk.Tests
         [Test]
         public void DeleteTaskTest()
         {
-            const string taskId = "";
+            string taskId = Config["TaskId"] ?? string.Empty;
             bool responseObject = MotionApi.DeleteTask(taskId);
+            Assert.That(responseObject, Is.True);
         }
 
         [Test]
@@ -71,26 +74,26 @@ namespace UseMotion.Net.Sdk.Tests
         [Test]
         public void ListTasksTest()
         {
-            const string workspaceId = "";
-            const string assigneeId = "";
-            const string cursor = "";
-            const string label = "";
-            const string name = "";
-            const string projectId = "";
-            const string status = "";
-            
-            ListTasks responseObject = MotionApi.ListTasks(workspaceId, assigneeId, cursor, label, name, projectId, status);
+            string workspaceId = Config["WorkspaceId"] ?? string.Empty;
+            string projectId = Config["ProjectId"] ?? string.Empty;
+
+            ListTasks responseObject = MotionApi.ListTasks(workspaceId, "", "", "", "", projectId);
+            Assert.That(responseObject, Is.Not.Null);
+            Assert.That(responseObject.Tasks, Is.Not.Null);
+            Assert.That(responseObject.Tasks, Is.Not.Empty);
         }
 
         [Test]
         public void MoveWorkspaceTest()
         {
-            const string taskId = "";
+            string taskId = Config["TaskId"] ?? string.Empty;
             MoveTask data = new ()
             {
-                WorkspaceId = ""
+                WorkspaceId = Config["WorkspaceId2"] ?? string.Empty
             };
             Task responseObject = MotionApi.MoveWorkspace(taskId, data);
+            Assert.That(responseObject, Is.Not.Null);
+            Assert.That(responseObject.Workspace?.Id, Is.EqualTo(data.WorkspaceId));
         }
         #endregion
 
