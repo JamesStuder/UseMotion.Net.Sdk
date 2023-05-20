@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using UseMotion.Net.Sdk.DataAccess;
@@ -181,7 +182,7 @@ namespace UseMotion.Net.Sdk.Services
         #endregion
         
         #region Users
-        public ListUsers ListUsers(string cursor = "", string teamId = "", string workspaceId = "")
+        public ListUsers ListUsers(string cursor, string teamId, string workspaceId)
         {
             Dictionary<string, string> properties = new ()
             {
@@ -192,7 +193,14 @@ namespace UseMotion.Net.Sdk.Services
             
             properties = properties.Where(pair => !string.IsNullOrEmpty(pair.Value)).ToDictionary(pair => pair.Key, pair => pair.Value);
 
-            string responseJson = MotionApiAccess.GetAsync("v1/users", properties).Result;
+            bool hasRequired = properties.ContainsKey("workspaceId") || properties.ContainsKey("teamId");
+
+            if (!hasRequired)
+            {
+                throw new Exception("Either workspaceId or teamId must be provided");
+            }
+            
+            string responseJson = MotionApiAccess.GetAsync("/users", properties).Result;
             return JsonConvert.DeserializeObject<ListUsers>(responseJson)!;
         }
         #endregion

@@ -36,7 +36,7 @@ namespace UseMotion.Net.Sdk.DataAccess
         internal async Task<string> PostAsync(string endpoint, string json)
         {
             StringContent content = new (json, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await Client.PostAsync(endpoint, content);
+            HttpResponseMessage response = await Client.PostAsync($"{ApiVersion}{endpoint}", content);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -56,7 +56,7 @@ namespace UseMotion.Net.Sdk.DataAccess
         internal async Task<string> PatchAsync(string endpoint, string json)
         {
             StringContent content = new (json, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await Client.PatchAsync(endpoint, content);
+            HttpResponseMessage response = await Client.PatchAsync($"{ApiVersion}{endpoint}", content);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -96,7 +96,7 @@ namespace UseMotion.Net.Sdk.DataAccess
         /// <returns>True if successful and false if not successful</returns>
         internal async Task<bool> DeleteAsync(string endpoint)
         {
-            HttpResponseMessage response = await Client.DeleteAsync(endpoint);
+            HttpResponseMessage response = await Client.DeleteAsync($"{ApiVersion}{endpoint}");
             return response.IsSuccessStatusCode;
         }
     }

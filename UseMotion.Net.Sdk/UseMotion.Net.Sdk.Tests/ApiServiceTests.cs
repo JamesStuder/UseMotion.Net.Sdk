@@ -143,17 +143,20 @@ namespace UseMotion.Net.Sdk.Tests
         [Test]
         public void RetrieveProject()
         {
-            const string id = "";
+            string id = Config["ProjectId"] ?? string.Empty;
             Project responseObject = MotionApi.RetrieveProject(id);
+            Assert.That(responseObject, Is.Not.Null);
+            Assert.That(responseObject.Id, Is.EqualTo(id));
         }
 
         [Test]
         public void ListProjects()
         {
-            const string workspaceId = "";
-            const string cursor = "";
-        
-            ListProjects responseObject = MotionApi.ListProjects(workspaceId, cursor);
+            string workspaceId = Config["WorkspaceId"] ?? string.Empty;
+
+            ListProjects responseObject = MotionApi.ListProjects(workspaceId);
+            Assert.That(responseObject, Is.Not.Null);
+            Assert.That(responseObject.Projects, Is.Not.Empty);
         }
 
         [Test]
@@ -161,10 +164,16 @@ namespace UseMotion.Net.Sdk.Tests
         {
             ProjectPost data = new ()
             {
-                Name = "",
-                WorkspaceId = ""
+                Name = "Test Project Created Via API",
+                WorkspaceId = Config["WorkspaceId"] ?? string.Empty,
+                Description = "Test Project Created Via API",
+                Priority = "LOW"
+                
             };
             Project responseObject = MotionApi.CreateProject(data);
+            Assert.That(responseObject, Is.Not.Null);
+            Assert.That(responseObject.WorkspaceId, Is.EqualTo(data.WorkspaceId));
+            Assert.That(responseObject.Name, Is.EqualTo(data.Name));
         }
         #endregion
     
@@ -182,10 +191,7 @@ namespace UseMotion.Net.Sdk.Tests
         [Test]
         public void ListWorkspacesTest()
         {
-            const string cursor = "";
-            const string[]? ids = null;
-
-            ListWorkspaces responseObject = MotionApi.ListWorkspaces(cursor, ids);
+            ListWorkspaces responseObject = MotionApi.ListWorkspaces();
             Assert.That(responseObject, Is.Not.Null);
             Assert.That(responseObject.Workspaces, Is.Not.Empty);
 
@@ -196,11 +202,9 @@ namespace UseMotion.Net.Sdk.Tests
         [Test]
         public void ListUsers()
         {
-            const string cursor = "";
-            const string teamId = "";
-            const string workspaceId = "";
+            string workspaceId = Config["WorkspaceId"] ?? string.Empty;
 
-            ListUsers responseObject = MotionApi.ListUsers(cursor, teamId, workspaceId);
+            ListUsers responseObject = MotionApi.ListUsers("","",workspaceId);
             Assert.That(responseObject, Is.Not.Null);
             Assert.That(responseObject.Users, Is.Not.Empty);
         }
