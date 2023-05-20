@@ -99,12 +99,15 @@ namespace UseMotion.Net.Sdk.Tests
         {
             RecurringTaskPost data = new ()
             {
-                Frequency = "",
-                Name = "",
-                WorkspaceId = ""
+                Frequency = "daily_every_week_day",
+                Name = "Test via api",
+                WorkspaceId = Config["WorkspaceId"] ?? string.Empty
             };
-            string jsonToSend = JsonConvert.SerializeObject(data);
+
             RecurringTask responseObject = MotionApi.CreateRecurringTask(data);
+            Assert.That(responseObject, Is.Not.Null);
+            Assert.That(responseObject.Name, Is.EqualTo(data.Name));
+            Assert.That(responseObject.Workspace.Id, Is.EqualTo(data.WorkspaceId));
         }
 
         [Test]
