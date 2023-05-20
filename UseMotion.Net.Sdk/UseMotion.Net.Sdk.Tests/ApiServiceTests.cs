@@ -36,9 +36,10 @@ namespace UseMotion.Net.Sdk.Tests
         [Test]
         public void RetrieveTaskTest()
         {
-            const string taskId = "";
+            string taskId = Config["TaskId"] ?? string.Empty;
             Task responseObject = MotionApi.RetrieveTask(taskId);
-           
+            Assert.That(responseObject, Is.Not.Null);
+            Assert.That(responseObject.Id, Is.EqualTo(taskId));
         }
 
         [Test]
