@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using NUnit.Framework;
 using UseMotion.Net.Sdk.Interfaces;
 using UseMotion.Net.Sdk.Models;
@@ -117,17 +115,19 @@ namespace UseMotion.Net.Sdk.Tests
         [Test]
         public void ListRecurringTasksTest()
         {
-            const string workspaceId = "";
-            const string cursor = "";
+            string workspaceId = Config["WorkspaceId"] ?? string.Empty;
 
-            ListRecurringTasks responseObject = MotionApi.ListRecurringTasks(workspaceId, cursor);
+            ListRecurringTasks responseObject = MotionApi.ListRecurringTasks(workspaceId);
+            Assert.That(responseObject, Is.Not.Null);
+            Assert.That(responseObject.Tasks, Is.Not.Null);
         }
 
         [Test]
         public void DeleteRecurringTaskTest()
         {
-            const string id = "";
+            string id = Config["RecurringTaskId"] ?? string.Empty;
             bool responseObject = MotionApi.DeleteRecurringTask(id);
+            Assert.That(responseObject, Is.True);
         }
         #endregion
 
@@ -137,20 +137,23 @@ namespace UseMotion.Net.Sdk.Tests
         {
             CommentPost data = new ()
             {
-                TaskId = "",
-                Content = ""
+                TaskId = Config["TaskId"] ?? string.Empty,
+                Content = "This is a create from unit test via API"
             };
 
             Comment responseObject = MotionApi.CreateComment(data);
+            Assert.That(responseObject, Is.Not.Null);
         }
 
         [Test]
         public void ListCommentsTest()
         {
-            const string taskId = "";
-            const string cursor = "";
+            string taskId = Config["TaskId"] ?? string.Empty;
 
-            ListComments responseObject = MotionApi.ListComments(taskId, cursor);
+            ListComments responseObject = MotionApi.ListComments(taskId);
+            Assert.That(responseObject, Is.Not.Null);
+            Assert.That(responseObject.Comments, Is.Not.Null);
+            Assert.That(responseObject.Comments, Is.Not.Empty);
         }
         #endregion
 
