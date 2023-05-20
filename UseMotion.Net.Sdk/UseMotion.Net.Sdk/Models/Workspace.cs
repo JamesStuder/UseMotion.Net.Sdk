@@ -20,7 +20,7 @@ namespace UseMotion.Net.Sdk.Models
         /// <summary>
         /// Identifier of the team
         /// </summary>
-        [JsonProperty("teamId")]
+        [JsonProperty("teamId", NullValueHandling = NullValueHandling.Ignore)]
         public string? TeamId { get; set; }
 
         /// <summary>

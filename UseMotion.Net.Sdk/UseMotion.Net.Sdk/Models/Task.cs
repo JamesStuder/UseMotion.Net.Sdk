@@ -9,7 +9,7 @@ namespace UseMotion.Net.Sdk.Models
         /// <summary>
         /// A duration can be one of the following... "NONE", "REMINDER", or a integer greater than 0
         /// </summary>
-        [JsonProperty("duration")]
+        [JsonProperty("duration", NullValueHandling = NullValueHandling.Ignore)]
         public string? Duration { get; set; }
 
         /// <summary>
@@ -99,13 +99,13 @@ namespace UseMotion.Net.Sdk.Models
         /// <summary>
         /// The time that motion has scheduled this task to start
         /// </summary>
-        [JsonProperty("scheduledStart")]
+        [JsonProperty("scheduledStart", NullValueHandling = NullValueHandling.Ignore)]
         public DateTime? ScheduledStart { get; set; }
 
         /// <summary>
         /// The time that motion has scheduled this task to end
         /// </summary>
-        [JsonProperty("scheduledEnd")]
+        [JsonProperty("scheduledEnd", NullValueHandling = NullValueHandling.Ignore)]
         public DateTime? ScheduledEnd { get; set; }
 
         /// <summary>

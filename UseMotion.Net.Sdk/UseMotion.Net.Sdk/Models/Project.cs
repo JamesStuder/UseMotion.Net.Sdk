@@ -19,13 +19,13 @@ namespace UseMotion.Net.Sdk.Models
         /// <summary>
         /// Description of the project
         /// </summary>
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string? Description { get; set; }
 
         /// <summary>
         /// Id of the workspace this project belongs to
         /// </summary>
-        [JsonProperty("workspaceId")]
+        [JsonProperty("workspaceId", NullValueHandling = NullValueHandling.Ignore)]
         public string? WorkspaceId { get; set; }
     }
 }

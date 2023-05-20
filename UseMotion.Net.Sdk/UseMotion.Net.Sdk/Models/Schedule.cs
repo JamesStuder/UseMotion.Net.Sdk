@@ -13,8 +13,8 @@ namespace UseMotion.Net.Sdk.Models
         /// <summary>
         /// Uses the default timezone
         /// </summary>
-        [JsonProperty("isDefaultTimezone")]
-        public bool IsDefaultTimezone { get; set; }
+        [JsonProperty("isDefaultTimezone", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsDefaultTimezone { get; set; }
 
         /// <summary>
         /// Timezone of the schedule

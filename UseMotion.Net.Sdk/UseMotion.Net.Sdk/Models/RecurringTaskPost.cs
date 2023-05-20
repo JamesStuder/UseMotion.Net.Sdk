@@ -14,31 +14,31 @@ namespace UseMotion.Net.Sdk.Models
         /// <summary>
         /// Default = SOFT. Allowed values: SOFT, HARD
         /// </summary>
-        [JsonProperty("deadlineType")]
+        [JsonProperty("deadlineType", NullValueHandling = NullValueHandling.Ignore)]
         public string? DeadlineType { get; set; }
 
         /// <summary>
         /// A duration can be one of the following... "REMINDER", or a integer greater than 0
         /// </summary>
-        [JsonProperty("duration")]
+        [JsonProperty("duration", NullValueHandling = NullValueHandling.Ignore)]
         public string? Duration { get; set; }
 
         /// <summary>
         /// ISO 8601 Date which is trimmed to the start of the day passed. Example: 2023-04-20
         /// </summary>
-        [JsonProperty("startingOn")]
+        [JsonProperty("startingOn", NullValueHandling = NullValueHandling.Ignore)]
         public DateTime? StartingOn { get; set; }
 
         /// <summary>
         /// Preferred time to start the recurring task.
         /// </summary>
-        [JsonProperty("idealTime")]
+        [JsonProperty("idealTime", NullValueHandling = NullValueHandling.Ignore)]
         public string? IdealTime { get; set; }
 
         /// <summary>
         /// Schedule the task must adhere to.  Default = 'Work Hours'.
         /// </summary>
-        [JsonProperty("schedule")]
+        [JsonProperty("schedule", NullValueHandling = NullValueHandling.Ignore)]
         public string? Schedule { get; set; }
 
         /// <summary>
@@ -56,19 +56,19 @@ namespace UseMotion.Net.Sdk.Models
         /// <summary>
         /// Description of the recurring task
         /// </summary>
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string? Description { get; set; }
 
         /// <summary>
         /// Default = MEDIUM.  Allowed values: MEDIUM, HIGH
         /// </summary>
-        [JsonProperty("priority")]
+        [JsonProperty("priority", NullValueHandling = NullValueHandling.Ignore)]
         public string? Priority { get; set; }
 
         /// <summary>
         /// The user id the task should be assigned too
         /// </summary>
-        [JsonProperty("assigneeId")]
+        [JsonProperty("assigneeId", NullValueHandling = NullValueHandling.Ignore)]
         public string? AssigneeId { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace UseMotion.Net.Sdk.Models
         /// <summary>
         /// The user id the task should be assigned to
         /// </summary>
-        [JsonProperty("assigneeId")]
+        [JsonProperty("assigneeId", NullValueHandling = NullValueHandling.Ignore)]
         public string? AssigneeId { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace UseMotion.Net.Sdk.Models
         /// <summary>
         /// Email of the user
         /// </summary>
-        [JsonProperty("email")]
+        [JsonProperty("email", NullValueHandling = NullValueHandling.Ignore)]
         public string? Email { get; set; }
     }
 }

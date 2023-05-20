@@ -26,7 +26,7 @@ namespace UseMotion.Net.Sdk.Models
         /// <summary>
         /// Description of the recurring task
         /// </summary>
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string? Description { get; set; }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace UseMotion.Net.Sdk.Models
         /// <summary>
         /// Linked Project
         /// </summary>
-        [JsonProperty("project")]
+        [JsonProperty("project", NullValueHandling = NullValueHandling.Ignore)]
         public Project? Project { get; set; }
 
         /// <summary>
