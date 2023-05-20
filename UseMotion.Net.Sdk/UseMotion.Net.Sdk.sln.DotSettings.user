@@ -4,5 +4,6 @@
     &lt;TestId&gt;NUnit3x::A5C1C403-9426-4428-AF6B-C4E6F04E94A4::net7.0::UseMotion.Net.Sdk.Tests.ApiServiceTests.ListUsers&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::A5C1C403-9426-4428-AF6B-C4E6F04E94A4::net7.0::UseMotion.Net.Sdk.Tests.ApiServiceTests.ListWorkspacesTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::A5C1C403-9426-4428-AF6B-C4E6F04E94A4::net7.0::UseMotion.Net.Sdk.Tests.ApiServiceTests.ListStatusesForAWorkspaceTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::A5C1C403-9426-4428-AF6B-C4E6F04E94A4::net7.0::UseMotion.Net.Sdk.Tests.ApiServiceTests.GetSchedules&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

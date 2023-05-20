@@ -210,6 +210,8 @@ namespace UseMotion.Net.Sdk.Tests
         public void GetSchedules()
         {
             List<Schedule> responseObject = MotionApi.GetSchedules();
+            Assert.That(responseObject, Is.Not.Null);
+            Assert.That(responseObject, Is.Not.Empty);
         }
         #endregion
     }
