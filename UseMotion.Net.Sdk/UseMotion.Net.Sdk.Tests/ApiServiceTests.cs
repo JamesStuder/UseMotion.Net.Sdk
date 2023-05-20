@@ -53,10 +53,18 @@ namespace UseMotion.Net.Sdk.Tests
         {
             TaskPost data = new ()
             {
-                Name = "",
-                WorkspaceId = ""
+                Name = "Created Via API",
+                WorkspaceId = Config["WorkspaceId"] ?? string.Empty,
+                ProjectId = Config["ProjectId"] ?? string.Empty,
+                Description = "Created Via API",
+                Priority = "LOW",
+                Duration = "30"
             };
             Task responseObject = MotionApi.CreateTask(data);
+            Assert.That(responseObject, Is.Not.Null);
+            Assert.That(responseObject.Name, Is.EqualTo(data.Name));
+            Assert.That(responseObject.Workspace.Id, Is.EqualTo(data.WorkspaceId));
+            Assert.That(responseObject.Project.Id, Is.EqualTo(data.ProjectId));
         }
 
         [Test]

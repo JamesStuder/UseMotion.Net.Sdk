@@ -35,15 +35,21 @@ namespace UseMotion.Net.Sdk.DataAccess
         /// <exception cref="Exception">If not a success code from API will throw exception with status code received and the name of the endpoint</exception>
         internal async Task<string> PostAsync(string endpoint, string json)
         {
-            StringContent content = new (json, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await Client.PostAsync($"{ApiVersion}{endpoint}", content);
-
-            if (!response.IsSuccessStatusCode)
+            try
             {
-                throw new Exception($"PostAsync Error: {response.StatusCode} for endpoint {endpoint}");
-            
+                StringContent content = new (json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await Client.PostAsync($"{ApiVersion}{endpoint}", content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"PostAsync Error: {response.StatusCode} for endpoint {endpoint}");
+                }
+                return await response.Content.ReadAsStringAsync();
             }
-            return await response.Content.ReadAsStringAsync();
+            catch (Exception e)
+            {
+                throw new Exception($"PostAsync", e);
+            }
         }
     
         /// <summary>
@@ -55,14 +61,21 @@ namespace UseMotion.Net.Sdk.DataAccess
         /// <exception cref="Exception">If not a success code from API will throw exception with status code received and the name of the endpoint</exception>
         internal async Task<string> PatchAsync(string endpoint, string json)
         {
-            StringContent content = new (json, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await Client.PatchAsync($"{ApiVersion}{endpoint}", content);
-
-            if (!response.IsSuccessStatusCode)
+            try
             {
-                throw new Exception($"PatchAsync Error: {response.StatusCode} for endpoint {endpoint}");
+                StringContent content = new (json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await Client.PatchAsync($"{ApiVersion}{endpoint}", content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"PatchAsync Error: {response.StatusCode} for endpoint {endpoint}");
+                }
+                return await response.Content.ReadAsStringAsync();
             }
-            return await response.Content.ReadAsStringAsync();
+            catch (Exception e)
+            {
+                throw new Exception($"PatchAsync", e);
+            }
         }
     
         /// <summary>
@@ -74,19 +87,26 @@ namespace UseMotion.Net.Sdk.DataAccess
         /// <exception cref="Exception">If not a success code from API will throw exception with status code received and the name of the endpoint</exception>
         internal async Task<string> GetAsync(string endpoint, Dictionary<string, string>? queryParameters = null)
         {
-            if (queryParameters != null && queryParameters.Count > 0)
+            try
             {
-                string query = string.Join("&", queryParameters.Select(kv => $"{Uri.EscapeDataString(kv.Key)}={Uri.EscapeDataString(kv.Value)}"));
-                endpoint += $"?{query}";
-            }
+                if (queryParameters != null && queryParameters.Count > 0)
+                {
+                    string query = string.Join("&", queryParameters.Select(kv => $"{Uri.EscapeDataString(kv.Key)}={Uri.EscapeDataString(kv.Value)}"));
+                    endpoint += $"?{query}";
+                }
             
-            HttpResponseMessage response = await Client.GetAsync($"{ApiVersion}{endpoint}");
+                HttpResponseMessage response = await Client.GetAsync($"{ApiVersion}{endpoint}");
 
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception($"GetAsync Error: {response.StatusCode} for endpoint {endpoint}");
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"GetAsync Error: {response.StatusCode} for endpoint {endpoint}");
+                }
+                return await response.Content.ReadAsStringAsync();
             }
-            return await response.Content.ReadAsStringAsync();
+            catch (Exception e)
+            {
+                throw new Exception($"GetAsync", e);
+            }
         }
     
         /// <summary>
@@ -96,8 +116,15 @@ namespace UseMotion.Net.Sdk.DataAccess
         /// <returns>True if successful and false if not successful</returns>
         internal async Task<bool> DeleteAsync(string endpoint)
         {
-            HttpResponseMessage response = await Client.DeleteAsync($"{ApiVersion}{endpoint}");
-            return response.IsSuccessStatusCode;
+            try
+            {
+                HttpResponseMessage response = await Client.DeleteAsync($"{ApiVersion}{endpoint}");
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"DeleteAsync", e);
+            }
         }
     }
 }
