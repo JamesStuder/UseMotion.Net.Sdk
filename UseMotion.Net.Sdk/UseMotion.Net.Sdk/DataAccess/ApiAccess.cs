@@ -74,10 +74,10 @@ namespace UseMotion.Net.Sdk.DataAccess
         /// <exception cref="Exception">If not a success code from API will throw exception with status code received and the name of the endpoint</exception>
         internal async Task<string> GetAsync(string endpoint, Dictionary<string, string>? queryParameters = null)
         {
-            if (queryParameters != null)
+            if (queryParameters != null && queryParameters.Count > 0)
             {
                 string query = string.Join("&", queryParameters.Select(kv => $"{Uri.EscapeDataString(kv.Key)}={Uri.EscapeDataString(kv.Value)}"));
-                endpoint += query;
+                endpoint += $"?{query}";
             }
             
             HttpResponseMessage response = await Client.GetAsync($"{ApiVersion}{endpoint}");

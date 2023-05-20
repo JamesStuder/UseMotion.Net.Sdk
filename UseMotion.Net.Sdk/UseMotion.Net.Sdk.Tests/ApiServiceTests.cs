@@ -172,10 +172,11 @@ namespace UseMotion.Net.Sdk.Tests
         [Test]
         public void ListStatusesForAWorkspaceTest()
         {
-            const string workspaceId = "";
+            string workspaceId = Config["WorkspaceId"] ?? string.Empty;
 
             List<Status> responseObject = MotionApi.ListStatusesForAWorkspace(workspaceId);
-
+            Assert.That(responseObject, Is.Not.Null);
+            Assert.That(responseObject, Is.Not.Empty);
         }
 
         [Test]
