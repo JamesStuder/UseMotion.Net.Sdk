@@ -3,7 +3,7 @@ This is a .NET SDK that I created to work with the Motion (https://www.usemotion
 
 Please go to https://docs.usemotion.com/docs/motion-rest-api/44e37c461ba67-motion-rest-api to learn about thier api and some of the considerations (i.e. whats required, how data should be formatted, etc.
 
-This project is not afflicated with Motion and this was something I put together based on my needs to create mulitple integrations.
+This project is not affiliated with Motion and this was something I put together based on my needs to create mulitple integrations.
 
 ## Implementation
 1) Install Nuget Package https://www.nuget.org/packages/UseMotion.Net.Sdk/
